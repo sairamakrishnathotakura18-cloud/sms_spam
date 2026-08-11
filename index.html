@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpamGuard AI — Smart SMS Scam & Spam Detector</title>
+    <meta name="description" content="Analyze suspicious SMS messages using machine learning to detect spam, scams, and phishing attempts instantly.">
+    
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Model Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- 1. TOP NAVIGATION -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-logo">
+                <div class="logo-shield">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">SpamGuard<span class="brand-accent">AI</span></span>
+                    <span class="brand-tagline">SMART SMS SECURITY</span>
+                </div>
+            </a>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Center Navigation Links -->
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#analyzer" class="nav-link">SMS Checker</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#metrics" class="nav-link">Metrics</a>
+                <a href="#model-info" class="nav-link">Model Info</a>
+                <a href="#privacy" class="nav-link">Security</a>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="nav-actions">
+                <a href="#api-docs" class="nav-link-subtle"><i class="fa-solid fa-code"></i> API</a>
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon moon-icon"></i>
+                    <i class="fa-solid fa-sun sun-icon"></i>
+                </button>
+                <a href="#analyzer" class="btn btn-primary btn-nav"><i class="fa-solid fa-magnifying-glass"></i> Check Message</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- 2. HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <div class="hero-bg-accent"></div>
+            
+            <div class="hero-badge">
+                <i class="fa-solid fa-shield-cat"></i> AI-POWERED MESSAGE SECURITY
+            </div>
+
+            <h1 class="hero-title">
+                Is this message <span class="gradient-text">safe or a scam?</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Analyze suspicious SMS messages using machine learning and detect spam, scams, and phishing attempts instantly.
+            </p>
+
+            <div class="hero-cta-group">
+                <a href="#analyzer" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze a Message →
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary btn-lg">
+                    <i class="fa-solid fa-circle-play"></i> How It Works
+                </a>
+            </div>
+
+            <div class="trust-indicator">
+                <i class="fa-solid fa-circle-check text-primary"></i> Powered by Machine Learning &nbsp;•&nbsp; 
+                <i class="fa-solid fa-bolt text-primary"></i> Real-time Analysis &nbsp;•&nbsp; 
+                <i class="fa-solid fa-user-lock text-primary"></i> Privacy Focused
+            </div>
+        </section>
+
+        <!-- 3. MESSAGE ANALYZER CARD -->
+        <section id="analyzer" class="section-container">
+            <div class="card analyzer-card">
+                <div class="analyzer-header">
+                    <div class="analyzer-icon-box">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <div>
+                        <h2 class="analyzer-title">Analyze Your Message</h2>
+                        <p class="analyzer-subtitle">Paste an SMS message below and let our AI check it for suspicious patterns.</p>
+                    </div>
+                </div>
+
+                <!-- Sample Message Quick Fill Pills -->
+                <div class="samples-row">
+                    <span class="samples-label">Quick Examples:</span>
+                    <div class="samples-pills">
+                        <button class="sample-pill spam" onclick="fillSample('spam1')">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Spam Prize Winner
+                        </button>
+                        <button class="sample-pill spam" onclick="fillSample('spam2')">
+                            <i class="fa-solid fa-skull-crossbones"></i> Phishing Bank Alert
+                        </button>
+                        <button class="sample-pill ham" onclick="fillSample('ham1')">
+                            <i class="fa-solid fa-circle-check"></i> Safe Friendly Chat
+                        </button>
+                        <button class="sample-pill ham" onclick="fillSample('ham2')">
+                            <i class="fa-solid fa-circle-check"></i> Safe Work Update
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Textarea -->
+                <div class="textarea-container">
+                    <textarea id="sms-input" placeholder="Paste your SMS message here... (e.g. Congratulations! You won a $1,000 Walmart gift card. Click link...)" rows="5"></textarea>
+                    <div class="textarea-footer">
+                        <span class="char-counter" id="char-counter">0 / 5000 chars</span>
+                        <button class="btn-text" onclick="clearInput()"><i class="fa-solid fa-rotate-left"></i> Clear text</button>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="analyzer-actions">
+                    <button id="analyze-btn" class="btn btn-primary btn-block btn-lg" onclick="analyzeSMS()">
+                        <span>Analyze Message →</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. ANALYSIS RESULT CARD (Populated dynamically) -->
+            <div id="result-container" class="result-container hidden">
+                
+                <!-- Loading State Indicator -->
+                <div id="loading-state" class="card result-card loading-card hidden">
+                    <div class="scanner-loader">
+                        <div class="scanner-ring"></div>
+                        <i class="fa-solid fa-brain scanner-icon"></i>
+                    </div>
+                    <h3>Analyzing with AI...</h3>
+                    <p>Evaluating NLP feature vectors, checking TF-IDF weights, and calculating spam probability.</p>
+                </div>
+
+                <!-- Result Card -->
+                <div id="result-card" class="card result-card hidden">
+                    <div class="result-banner" id="result-banner">
+                        <div class="result-badge-icon" id="result-badge-icon">
+                            <i id="result-icon" class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div class="result-title-area">
+                            <span class="risk-badge" id="risk-badge">HIGH RISK</span>
+                            <h3 class="result-heading" id="result-heading">⚠ Suspicious Message Detected</h3>
+                        </div>
+                    </div>
+
+                    <div class="result-body">
+                        <!-- Confidence Score Bar & Gauge -->
+                        <div class="metrics-summary-row">
+                            <div class="confidence-box">
+                                <span class="conf-label">Confidence Score</span>
+                                <span class="conf-value" id="conf-val">97.8%</span>
+                            </div>
+
+                            <div class="progress-box">
+                                <div class="progress-header">
+                                    <span>Spam Probability</span>
+                                    <span id="prob-val">97.8%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flagged Reasons Section -->
+                        <div class="why-flagged-section">
+                            <h4 class="flagged-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Why was this flagged?</h4>
+                            <p class="flagged-desc" id="flagged-desc">Key word patterns and features identified by the NLP model:</p>
+
+                            <!-- Feature Tags -->
+                            <div class="pattern-tags-grid" id="pattern-tags-grid">
+                                <!-- Dynamic Pattern Pills -->
+                            </div>
+                        </div>
+
+                        <!-- Recommendation Note -->
+                        <div class="recommendation-box" id="recommendation-box">
+                            <i class="fa-solid fa-circle-info rec-icon"></i>
+                            <span id="rec-text">Safety advisory based on model confidence score.</span>
+                        </div>
+
+                        <!-- Preprocessed Cleaned Text Display -->
+                        <div class="cleaned-tokens-box">
+                            <span class="tokens-label"><i class="fa-solid fa-filter"></i> TF-IDF Extracted Tokens:</span>
+                            <code id="cleaned-tokens-val">N/A</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ANALYSIS SUMMARY (MODEL METRICS CARDS) -->
+        <section id="metrics" class="section-container">
+            <div class="section-header center">
+                <span class="section-badge">PERFORMANCE BENCHMARKS</span>
+                <h2 class="section-title">Model Evaluation Metrics</h2>
+                <p class="section-desc">Real-time evaluation statistics computed on test dataset using Multinomial Naive Bayes.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-label">Accuracy</span>
+                        <div class="metric-icon blue"><i class="fa-solid fa-bullseye"></i></div>
+                    </div>
+                    <div class="metric-val" id="metric-accuracy">98.2%</div>
+                    <div class="metric-progress"><div class="metric-bar blue-bar" id="bar-accuracy" style="width: 98.2%;"></div></div>
+                    <span class="metric-sub text-success"><i class="fa-solid fa-arrow-up"></i> Top Overall Accuracy</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-label">Precision</span>
+                        <div class="metric-icon purple"><i class="fa-solid fa-crosshair"></i></div>
+                    </div>
+                    <div class="metric-val" id="metric-precision">97.8%</div>
+                    <div class="metric-progress"><div class="metric-bar purple-bar" id="bar-precision" style="width: 97.8%;"></div></div>
+                    <span class="metric-sub text-muted">Low False Positive Rate</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-label">Recall</span>
+                        <div class="metric-icon cyan"><i class="fa-solid fa-radar"></i></div>
+                    </div>
+                    <div class="metric-val" id="metric-recall">96.9%</div>
+                    <div class="metric-progress"><div class="metric-bar cyan-bar" id="bar-recall" style="width: 96.9%;"></div></div>
+                    <span class="metric-sub text-muted">High Detection Rate</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-label">F1 Score</span>
+                        <div class="metric-icon green"><i class="fa-solid fa-chart-line"></i></div>
+                    </div>
+                    <div class="metric-val" id="metric-f1">97.3%</div>
+                    <div class="metric-progress"><div class="metric-bar green-bar" id="bar-f1" style="width: 97.3%;"></div></div>
+                    <span class="metric-sub text-muted">Harmonic Mean Metric</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. HOW IT WORKS -->
+        <section id="how-it-works" class="section-container">
+            <div class="section-header center">
+                <span class="section-badge">SIMPLE 3-STEP PROCESS</span>
+                <h2 class="section-title">How SpamGuard AI Works</h2>
+                <p class="section-desc">From raw text message to instant machine learning scam prediction in seconds.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <div class="step-icon"><i class="fa-solid fa-paste"></i></div>
+                    <h3 class="step-title">Enter Message</h3>
+                    <p class="step-desc">Paste any suspicious text message, promotional SMS, or link alert into the analyzer box.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="step-title">AI Analysis</h3>
+                    <p class="step-desc">TF-IDF vectorizer extracts text n-grams and passes them through our trained Naive Bayes classifier.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <div class="step-icon"><i class="fa-solid fa-shield-check"></i></div>
+                    <h3 class="step-title">Get Result</h3>
+                    <p class="step-desc">Receive an instant Spam/Safe verdict alongside a percentage confidence score and key risk indicators.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. MODEL INFORMATION -->
+        <section id="model-info" class="section-container">
+            <div class="section-header center">
+                <span class="section-badge">ARCHITECTURE & STACK</span>
+                <h2 class="section-title">Powered by Machine Learning</h2>
+                <p class="section-desc">Our intelligent pipeline combines natural language processing algorithms with robust REST API serving.</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-font"></i></div>
+                    <h3 class="info-title">TF-IDF Vectorization</h3>
+                    <p class="info-desc">Converts raw SMS text into numeric feature matrices using Term Frequency-Inverse Document Frequency n-grams.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                    <h3 class="info-title">Multinomial Naive Bayes</h3>
+                    <p class="info-desc">Applies Bayes' Theorem to calculate the posterior probability of a text message being spam based on word occurrences.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-brands fa-python"></i></div>
+                    <h3 class="info-title">Python + Flask API</h3>
+                    <p class="info-desc">High-performance RESTful API endpoints serving real-time predictions, metrics, and batch processing.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3 class="info-title">Scikit-Learn Library</h3>
+                    <p class="info-desc">Industry-standard machine learning toolkit used for preprocessing, training, and model evaluation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. RECENT ANALYSIS (Prediction History) -->
+        <section id="history" class="section-container">
+            <div class="section-header-flex">
+                <div>
+                    <h2 class="section-title-sm"><i class="fa-solid fa-clock-rotate-left"></i> Recent Analysis History</h2>
+                    <p class="section-desc">Saved locally in your browser session for quick reference.</p>
+                </div>
+                <button class="btn btn-outline-danger btn-sm" onclick="clearHistory()">
+                    <i class="fa-solid fa-trash-can"></i> Clear History
+                </button>
+            </div>
+
+            <div class="card history-card">
+                <div class="table-responsive">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>SMS Message Snippet</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <!-- Dynamic history rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="empty-history-msg" class="empty-history">
+                    <i class="fa-solid fa-inbox"></i>
+                    <p>No recent analysis history found. Analyzed messages will appear here automatically.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. PRIVACY SECTION -->
+        <section id="privacy" class="section-container">
+            <div class="card privacy-card">
+                <div class="privacy-icon"><i class="fa-solid fa-user-shield"></i></div>
+                <div class="privacy-content">
+                    <h3 class="privacy-title">Your messages stay private.</h3>
+                    <p class="privacy-desc">
+                        SpamGuard AI respects user privacy. Text messages sent for analysis are processed transiently in-memory strictly for machine learning inference and are never sold, recorded, or permanently stored on external servers.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BATCH CSV & API DOCS EXPANDABLE SECTION -->
+        <section id="api-docs" class="section-container">
+            <div class="section-header center">
+                <span class="section-badge">DEVELOPER TOOLS</span>
+                <h2 class="section-title">REST API & Batch CSV Classification</h2>
+                <p class="section-desc">Integrate our SMS spam prediction engine into your applications or process bulk CSV datasets.</p>
+            </div>
+
+            <div class="dev-tools-grid">
+                <!-- Batch CSV Processor Card -->
+                <div class="card dev-card">
+                    <h3 class="dev-card-title"><i class="fa-solid fa-file-csv"></i> Batch CSV Classifier</h3>
+                    <p class="dev-card-desc">Upload a CSV file containing text messages to classify multiple SMS items simultaneously.</p>
+                    
+                    <div class="dropzone" id="dropzone" onclick="document.getElementById('csv-file-input').click()">
+                        <input type="file" id="csv-file-input" accept=".csv" class="hidden" onchange="handleCSVFileSelect(event)">
+                        <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                        <p><strong>Click to browse</strong> or drag & drop CSV file</p>
+                        <span class="dropzone-sub">Supported file type: .csv</span>
+                    </div>
+
+                    <div class="dropzone-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="downloadSampleCSV()">
+                            <i class="fa-solid fa-download"></i> Sample CSV
+                        </button>
+                    </div>
+
+                    <!-- Batch Results -->
+                    <div id="batch-results-area" class="batch-results-area hidden">
+                        <div class="batch-summary">
+                            <span>Total: <strong id="batch-total-count">0</strong></span>
+                            <span>Spam: <strong id="batch-spam-count">0</strong></span>
+                            <span>Safe: <strong id="batch-ham-count">0</strong></span>
+                            <button class="btn btn-primary btn-sm" onclick="downloadBatchResultsCSV()">Export CSV</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>SMS Snippet</th>
+                                        <th>Result</th>
+                                        <th>Confidence</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="batch-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Code Snippet Card -->
+                <div class="card dev-card">
+                    <h3 class="dev-card-title"><i class="fa-solid fa-code"></i> API Integration Endpoint</h3>
+                    <p class="dev-card-desc">Send HTTP POST requests to <code>/predict</code> for real-time model predictions.</p>
+
+                    <div class="code-box">
+                        <div class="code-header">
+                            <span>POST /predict</span>
+                            <button class="btn-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>curl -X POST http://127.0.0.1:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Congratulations! You won a $1000 prize. Call 0800 now!"}'</code></pre>
+                    </div>
+
+                    <div class="code-box" style="margin-top: 16px;">
+                        <div class="code-header">
+                            <span>JSON Response (200 OK)</span>
+                        </div>
+                        <pre><code>{
+  "prediction": "Spam",
+  "confidence": 97.8,
+  "is_spam": true,
+  "spam_probability": 97.8
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 10. FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="brand-logo">
+                    <div class="logo-shield">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <span class="brand-name">SpamGuard<span class="brand-accent">AI</span></span>
+                </a>
+                <p class="footer-tagline">Intelligent protection against suspicious text messages and phishing scams.</p>
+            </div>
+
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <a href="#analyzer">SMS Checker</a>
+                    <a href="#metrics">Model Metrics</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#api-docs">Batch CSV</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="#api-docs">API Documentation</a>
+                    <a href="#model-info">Machine Learning</a>
+                    <a href="#privacy">Security & Privacy</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://github.com" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    <a href="#privacy">Contact Support</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 SpamGuard AI System. Built with Python, Flask, Scikit-Learn & Vanilla JS.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>

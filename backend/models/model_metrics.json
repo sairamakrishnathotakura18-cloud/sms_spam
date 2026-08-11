@@ -1,0 +1,242 @@
+{
+  "primary_model": "Multinomial Naive Bayes",
+  "primary_metrics": {
+    "accuracy": 97.93,
+    "precision": 98.46,
+    "recall": 85.91,
+    "f1_score": 91.76,
+    "confusion_matrix": [
+      [
+        962,
+        2
+      ],
+      [
+        21,
+        128
+      ]
+    ]
+  },
+  "comparison": {
+    "Multinomial Naive Bayes": {
+      "accuracy": 97.93,
+      "precision": 98.46,
+      "recall": 85.91,
+      "f1_score": 91.76,
+      "confusion_matrix": [
+        [
+          962,
+          2
+        ],
+        [
+          21,
+          128
+        ]
+      ]
+    },
+    "Logistic Regression": {
+      "accuracy": 96.86,
+      "precision": 97.5,
+      "recall": 78.52,
+      "f1_score": 86.99,
+      "confusion_matrix": [
+        [
+          961,
+          3
+        ],
+        [
+          32,
+          117
+        ]
+      ]
+    },
+    "Support Vector Machine": {
+      "accuracy": 98.2,
+      "precision": 97.78,
+      "recall": 88.59,
+      "f1_score": 92.96,
+      "confusion_matrix": [
+        [
+          961,
+          3
+        ],
+        [
+          17,
+          132
+        ]
+      ]
+    }
+  },
+  "dataset_stats": {
+    "total_messages": 5563,
+    "spam_messages": 747,
+    "ham_messages": 4816,
+    "train_size": 4450,
+    "test_size": 1113
+  },
+  "top_words": {
+    "spam": [
+      {
+        "word": "call",
+        "score": 46.55
+      },
+      {
+        "word": "free",
+        "score": 34.47
+      },
+      {
+        "word": "txt",
+        "score": 27.6
+      },
+      {
+        "word": "text",
+        "score": 24.79
+      },
+      {
+        "word": "mobil",
+        "score": 23.37
+      },
+      {
+        "word": "claim",
+        "score": 21.59
+      },
+      {
+        "word": "stop",
+        "score": 21.55
+      },
+      {
+        "word": "prize",
+        "score": 19.72
+      },
+      {
+        "word": "ur",
+        "score": 19.34
+      },
+      {
+        "word": "repli",
+        "score": 19.3
+      },
+      {
+        "word": "servic",
+        "score": 16.14
+      },
+      {
+        "word": "new",
+        "score": 15.41
+      },
+      {
+        "word": "tone",
+        "score": 14.67
+      },
+      {
+        "word": "nokia",
+        "score": 13.74
+      },
+      {
+        "word": "award",
+        "score": 13.27
+      },
+      {
+        "word": "urgent",
+        "score": 12.63
+      },
+      {
+        "word": "win",
+        "score": 12.54
+      },
+      {
+        "word": "cash",
+        "score": 12.53
+      },
+      {
+        "word": "get",
+        "score": 12.18
+      },
+      {
+        "word": "send",
+        "score": 11.88
+      }
+    ],
+    "ham": [
+      {
+        "word": "im",
+        "score": 99.44
+      },
+      {
+        "word": "ok",
+        "score": 96.09
+      },
+      {
+        "word": "go",
+        "score": 91.59
+      },
+      {
+        "word": "get",
+        "score": 80.99
+      },
+      {
+        "word": "come",
+        "score": 79.04
+      },
+      {
+        "word": "call",
+        "score": 68.22
+      },
+      {
+        "word": "ill",
+        "score": 65.39
+      },
+      {
+        "word": "ltgt",
+        "score": 64.85
+      },
+      {
+        "word": "dont",
+        "score": 61.9
+      },
+      {
+        "word": "got",
+        "score": 60.65
+      },
+      {
+        "word": "like",
+        "score": 60.21
+      },
+      {
+        "word": "know",
+        "score": 59.15
+      },
+      {
+        "word": "time",
+        "score": 57.3
+      },
+      {
+        "word": "good",
+        "score": 57.04
+      },
+      {
+        "word": "want",
+        "score": 51.68
+      },
+      {
+        "word": "love",
+        "score": 49.43
+      },
+      {
+        "word": "home",
+        "score": 48.9
+      },
+      {
+        "word": "ur",
+        "score": 47.82
+      },
+      {
+        "word": "still",
+        "score": 47.79
+      },
+      {
+        "word": "day",
+        "score": 46.57
+      }
+    ]
+  }
+}
