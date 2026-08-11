@@ -114,13 +114,19 @@ function initEventListeners() {
 async function checkApiHealth() {
     try {
         const res = await fetch(`${API_BASE_URL}/health`);
-        const data = await res.json();
-        if (!res.ok || !data.model_loaded) {
-            console.warn("API Server health check warning:", data);
+
+        if (!res.ok) {
+            console.warn("API health check returned:", res.status);
+            return;
         }
+
+        const data = await res.json();
+        console.log("SpamGuard API:", data);
+
     } catch (err) {
-        showToast("Backend Flask server unavailable. Make sure app.py is running.", "error");
+        console.warn("API health check failed:", err);
     }
+}
 }
 
 async function fetchModelMetrics() {
