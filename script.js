@@ -107,7 +107,6 @@ function initEventListeners() {
         });
     }
 }
-
 /* ==========================================================================
    2. API Integration & Health Check
    ========================================================================== */
@@ -119,14 +118,11 @@ async function checkApiHealth() {
             console.warn("API health check returned:", res.status);
             return;
         }
-
         const data = await res.json();
         console.log("SpamGuard API:", data);
-
     } catch (err) {
         console.warn("API health check failed:", err);
     }
-}
 }
 
 async function fetchModelMetrics() {
